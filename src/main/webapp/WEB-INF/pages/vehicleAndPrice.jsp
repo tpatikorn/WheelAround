@@ -812,7 +812,11 @@ var table1;
 			<c:forEach items="${loginBean.vAndPriceListBean}" var="vAndPriceListBean" varStatus="status">
 			<tbody>
 			<tr>
+<<<<<<< HEAD
 				<td align="left"><form:checkbox value="${vAndPriceListBean.getModelName() }" path="vAndPriceListBean[${status.index}].modelName" /><c:out value="${vAndPriceListBean.getModelName() }" /> </td>
+=======
+				<td align="left"><form:radiobutton value="${vAndPriceListBean.getModelName() }" path="vAndPriceListBean[${status.index}].modelName" /><c:out value="${vAndPriceListBean.getModelName() }" /> </td>
+>>>>>>> branch 'master' of https://github.com/nsmenon/WheelAround.git
 				<td align="left"><form:label value="${vAndPriceListBean.getModelType() }" path="vAndPriceListBean[${status.index}].modelType" /> <c:out value="${vAndPriceListBean.getModelType() }" /> </td>
 				<td align="left"><form:label value="${vAndPriceListBean.getGarageName() }" path="vAndPriceListBean[${status.index}].garageName" /> <c:out value="${vAndPriceListBean.getGarageName() }" /> </td>
 				<td align="left"><form:label value="${vAndPriceListBean.getGarageLocation() }" path="vAndPriceListBean[${status.index}].garageLocation" /> <c:out value="${vAndPriceListBean.getGarageLocation() }" /> </td>
