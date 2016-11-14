@@ -27,8 +27,9 @@ public ModelAndView createNewUser(HttpServletRequest request, HttpServletRespons
 	ModelAndView model= null;
 	try
 	{	boolean registerForNewCustomer = loginDelegate.registerNewUser(registrationBean);
-		if(registerForNewCustomer)
-		{	model.addObject("registrationBean", registrationBean);
+		if(registerForNewCustomer)	
+		{	
+			model = new ModelAndView("vehicle_rent");
 			System.out.println("User Registration Successful");
 		}
 	}

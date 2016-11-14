@@ -767,8 +767,13 @@ $.Widget.prototype = {
 		<h1>Wheel Around - New User Registration</h1>
 		 <form:form id="registrationForm" method="post" action="/wheelAroundWeb/wheelAround/register" modelAttribute="registrationBean">
 			<p>
-				<form:label path="name" for="name">Name</form:label>
-				 <form:input id="name" name="name" path="name" />
+				<form:label path="fname" for="fname">First Name</form:label>
+				 <form:input id="fname" name="fname" path="fname" />
+			</p>
+			
+			<p>
+				<form:label path="lname" for="lname">Last Name</form:label>
+				 <form:input id="lname" name="lname" path="lname" />
 			</p>
 			
 			<p>
@@ -776,13 +781,11 @@ $.Widget.prototype = {
 				 <form:input id="email" name="email" path="email" />
 			</p>
 			
-			
 			<p>
-				<form:label path="dob" for="dob">Date of Birth (MM/DD/YYY)</form:label>
-				 <form:input id="dob" name="dob" path="dob" />
+				<form:label path="phoneNumber" for="phoneNumber">Phone Number</form:label>
+				 <form:input id="phoneNumber" name="phoneNumber" path="phoneNumber" />
 			</p>
-			
-			
+					
 			<p>
 				<form:label path="userName" for="userName">Username</form:label>
 				 <form:input id="userName" name="userName" path="userName" />
