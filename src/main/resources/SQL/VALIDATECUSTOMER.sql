@@ -1,4 +1,4 @@
-create or replace FUNCTION VALIDATECUSTOMER(userName in varchar2, passwrd in varchar2)
+create or replace FUNCTION validateCustomer(userName in varchar2, passwrd in varchar2)
 
   return VARCHAR2
   
@@ -8,18 +8,24 @@ create or replace FUNCTION VALIDATECUSTOMER(userName in varchar2, passwrd in var
   customerValidCount NUMBER;
   
 BEGIN
-  SELECT CID
-    INTO customerId
+
+for c in (SELECT CID INTO customerId
     FROM CUSTOMERS
-    where CUSTOMERS.USERNAME=userName;
+    where CUSTOMERS.USERNAME=userName)
     
-  SELECT COUNT(*) INTO 
+    loop
+
+    customerId := c.CID;
+    
+    SELECT COUNT(*) INTO 
     customerValidCount
     FROM AUTHENTICATION
     where  
     AUTHENTICATION.CID=customerId and
     AUTHENTICATION.HASHED_PW=passwrd;
-  
+
+    end loop;
+    
   if customerValidCount = 1 then
     return 'Login successful!';
   else

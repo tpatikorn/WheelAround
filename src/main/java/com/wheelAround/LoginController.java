@@ -1,5 +1,9 @@
 package com.wheelAround;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wheelAround.model.LoginDelegate;
+import com.wheelAround.model.VehicleTpeListBean;
 import com.wheelAround.model.dao.LoginBean;
 import com.wheelAround.model.dao.RegistrationBean;
 
@@ -47,16 +52,30 @@ public ModelAndView executeLogin(HttpServletRequest request, HttpServletResponse
 {
 	ModelAndView model= null;
 	try
-	{	boolean isValidUser = loginDelegate.isValidUser(loginBean.getUsername(), loginBean.getPassword());
-		if(isValidUser)
+	{	String isValidUser = loginDelegate.isValidUser(loginBean.getUsername(), loginBean.getPassword());
+		if(isValidUser != null)
 		{
 			System.out.println("User Login Successful");
+			loginBean.setCid(isValidUser);
 			request.setAttribute("loggedInUser", loginBean.getUsername());
-			model = new ModelAndView("vehicle_rent");
+			Map<String,String> vehicleTypes = loginDelegate.getTypeList();
+			List<VehicleTpeListBean> vType = new ArrayList<VehicleTpeListBean>();
+			
+			for (Map.Entry<String, String> entry : vehicleTypes.entrySet()) {
+				VehicleTpeListBean tp = new VehicleTpeListBean();
+				String[] values = entry.getValue().split("~~");
+				tp.setTypeId(values[0]);
+				tp.setTypeName(values[1]);
+				tp.setTypePrice(values[2]);	
+				vType.add(tp);
+			}
+			loginBean.setvTypeBean(vType);
+			
+			model = new ModelAndView("vehicle_rent", "loginBean", loginBean);
 		}
 		else
 		{
-			model = new ModelAndView("login");
+			model = new ModelAndView("Login");
 			model.addObject("loginBean", loginBean);
 			request.setAttribute("message", "Invalid credentials!!");
 		}
